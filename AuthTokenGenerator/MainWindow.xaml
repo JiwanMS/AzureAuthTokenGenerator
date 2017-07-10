@@ -1,0 +1,59 @@
+﻿<Window x:Class="AuthTokenGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Token Manager" Height="830" Width="900" ResizeMode="CanMinimize"
+        xmlns:configManager="clr-namespace:AuthTokenGenerator"
+        xmlns:control="clr-namespace:AuthTokenGenerator"
+        DataContext="{Binding Env, Source={StaticResource Locator}}">
+
+    <Grid>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Generate Token"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="Tenant" VerticalAlignment="Top" Height="23"/>
+                    <TextBox x:Name="textbox_tenant" HorizontalAlignment="Left" Height="23" Margin="125,99,0,0" TextWrapping="Wrap" Text="{Binding Path=Tenant, Mode=OneWay}" VerticalAlignment="Top" Width="692"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,141,0,0" TextWrapping="Wrap" Text="AAD Instance" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75" Height="23"/>
+                    <TextBox x:Name="textbox_aadinstance" HorizontalAlignment="Left" Height="23" Margin="125,141,0,0" TextWrapping="Wrap" Text="{Binding Path=AadInstance, Mode=OneWay}" VerticalAlignment="Top" Width="692" RenderTransformOrigin="0.487,3"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,185,0,0" TextWrapping="Wrap" Text="Client Id" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75" Height="23"/>
+                    <TextBox x:Name="textbox_clientid" HorizontalAlignment="Left" Height="23" Margin="125,185,0,0" TextWrapping="Wrap" Text="{Binding Path=ClientId, Mode=OneWay}" VerticalAlignment="Top" Width="692" RenderTransformOrigin="0.487,3"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,230,0,0" TextWrapping="Wrap" Text="Client Secret" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75" Height="23"/>
+                    <TextBox x:Name="textbox_clientsecret" HorizontalAlignment="Left" Height="23" Margin="125,230,0,0" TextWrapping="Wrap" Text="{Binding Path=ClientSecret, Mode=OneWay}" VerticalAlignment="Top" Width="692" RenderTransformOrigin="0.487,3"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,272,0,0" TextWrapping="Wrap" Text="APIResourceId" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75" Height="23"/>
+                    <TextBox x:Name="textbox_apiresourceid" HorizontalAlignment="Left" Height="23" Margin="125,272,0,0" TextWrapping="Wrap" Text="{Binding Path=ApiResourceId, Mode=OneWay}" VerticalAlignment="Top" Width="692" RenderTransformOrigin="0.487,3"/>
+                    <Button x:Name="btn_generatetoken" Content="Generate Token" HorizontalAlignment="Left" Margin="125,340,0,0" VerticalAlignment="Top" Width="692" Height="35" RenderTransformOrigin="0.698,0.486" FontSize="22" Command="{Binding Path=SaveCommand}"/>
+                    <TextBox x:Name="textbox_token" HorizontalAlignment="Left" Height="315" Margin="125,431,0,0" Text="{Binding Path=Token, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="692"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,431,0,0" TextWrapping="Wrap" Text="Token" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,392,0,0" TextWrapping="Wrap" Text="Expires On" VerticalAlignment="Top" RenderTransformOrigin="0.531,2.75"/>
+                    <TextBox x:Name="textbox_expireson" HorizontalAlignment="Left" Height="23" Margin="125,392,0,0" TextWrapping="Wrap" Text="{Binding Path=ExpiresOn, Mode=OneWay}" VerticalAlignment="Top" Width="692" RenderTransformOrigin="0.487,3"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,34,0,0" TextWrapping="Wrap" Text="Environment" VerticalAlignment="Top" Height="23"/>
+                    <ComboBox x:Name="cmb_Environment" HorizontalAlignment="Left" Margin="125,34,0,0" VerticalAlignment="Top" Width="350" Height="23" ItemsSource ="{Binding Path=Environments}" DisplayMemberPath="Name" SelectedItem="{Binding Path=SelectedEnvironment, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Validate Token"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Authority" Margin="33,34,770,686" Height="30" VerticalAlignment="Top" RenderTransformOrigin="-4.4,-11.609"/>
+                    <TextBlock x:Name="textBlock_Copy" TextWrapping="Wrap" Text="Audience" Margin="33,84,770,636" Height="30" VerticalAlignment="Top" RenderTransformOrigin="-4.4,-11.609"/>
+                    <TextBlock x:Name="textBlock_Copy1" TextWrapping="Wrap" Text="Token" Margin="33,187,770,0" Height="30" VerticalAlignment="Top" RenderTransformOrigin="-4.4,-11.609"/>
+                    <TextBox x:Name="txt_Authority" HorizontalAlignment="Left" Height="23" Margin="148,34,0,0" TextWrapping="Wrap" Text="{Binding Path=Authority, Mode=TwoWay}" VerticalAlignment="Top" Width="656"/>
+                    <TextBox x:Name="txt_audience" HorizontalAlignment="Left" Height="23" Margin="148,84,0,0" TextWrapping="Wrap" Text="{Binding Path=Audience, Mode=TwoWay}" VerticalAlignment="Top" Width="656"/>
+                    <TextBox x:Name="txt_tokentovalidate" HorizontalAlignment="Left" Height="332" Margin="148,187,0,0" TextWrapping="Wrap" Text="{Binding Path=TokenToValidate, Mode=TwoWay}" VerticalAlignment="Top" Width="656"/>
+                    <Button x:Name="button" Content="Validate" HorizontalAlignment="Left" Margin="148,563,0,0" VerticalAlignment="Top" Width="656" Height="26" Command="{Binding Path=ValidateTokenCommand}"/>
+                    <TextBlock x:Name="textBlock_Copy2" TextWrapping="Wrap" Text="Region" Margin="33,134,770,0" Height="30" VerticalAlignment="Top" RenderTransformOrigin="-4.4,-11.609"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="148,134,0,0" VerticalAlignment="Top" Width="165" Height="24" ItemsSource ="{Binding Path=Region}" DisplayMemberPath="Key" SelectedItem="{Binding Path=SelectedRegion, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>
